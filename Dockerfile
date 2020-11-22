@@ -1,18 +1,22 @@
-FROM alpine:3
-
-LABEL maintaner="Gilberto Taccari <gilberto.taccari@gmail.com>"
+# Build structurizr-cli
+FROM gradle:jdk11 as builder
 
 ENV STRUCTURIZR_CLI_VERSION=1.5.0
 
-RUN apk --no-cache add wget openjdk11
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN git clone --depth 1 --branch "v$STRUCTURIZR_CLI_VERSION" https://github.com/structurizr/cli.git
+RUN cd cli && gradle bootJar --no-daemon
 
-ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk
-ENV PATH="$JAVA_HOME/bin:${PATH}"
+# Structurizr CLI
+FROM adoptopenjdk:11-jre-hotspot-focal
+
+LABEL maintaner="Gilberto Taccari <gilberto.taccari@gmail.com>"
 
 WORKDIR /opt
-ENV STRUCTURIZR_CLI_URL="https://github.com/structurizr/cli/releases/download/v$STRUCTURIZR_CLI_VERSION/structurizr-cli-$STRUCTURIZR_CLI_VERSION.zip"
-RUN wget -qO - $STRUCTURIZR_CLI_URL | jar xvf /dev/stdin
-RUN mv "structurizr-cli-$STRUCTURIZR_CLI_VERSION.jar" structurizr-cli.jar
+COPY --from=builder /home/gradle/src/cli/build/libs/structurizr-cli-*.jar ./structurizr-cli.jar
+
+WORKDIR /home
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
