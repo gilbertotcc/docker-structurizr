@@ -1,2 +1,3 @@
-# docker-structurizr
+# Docker Structurizr CLI
+
 Structurizr CLI Docker image.
