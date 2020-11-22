@@ -4,7 +4,7 @@ LABEL maintaner="Gilberto Taccari <gilberto.taccari@gmail.com>"
 
 ENV STRUCTURIZR_CLI_VERSION=1.5.0
 
-RUN apk --no-cache add wget openjdk11
+RUN apk --no-cache add wget openjdk11-jre-headless
 
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 ENV PATH="$JAVA_HOME/bin:${PATH}"
