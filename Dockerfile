@@ -8,7 +8,7 @@ WORKDIR /home/gradle/src
 RUN git clone --depth 1 --branch "v$STRUCTURIZR_CLI_VERSION" https://github.com/structurizr/cli.git
 RUN cd cli && gradle bootJar --no-daemon
 
-# Docker Structurizr CLI
+# Structurizr CLI
 FROM adoptopenjdk:11-jre-hotspot-focal
 
 LABEL maintaner="Gilberto Taccari <gilberto.taccari@gmail.com>"
