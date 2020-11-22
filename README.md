@@ -1,6 +1,7 @@
 # Docker Structurizr CLI
 
-Structurizr CLI Docker image.
+The Structurizr CLI Docker image allows the execution of
+[Structurizr CLI](https://github.com/structurizr/cli) through Docker.
 
 ## Usage
 
