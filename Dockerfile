@@ -15,6 +15,8 @@ RUN wget -q $STRUCTURIZR_CLI_URL -O structurizr-cli.zip
 RUN unzip structurizr-cli.zip && rm structurizr-cli.zip
 RUN mv "structurizr-cli-$STRUCTURIZR_CLI_VERSION.jar" structurizr-cli.jar
 
+WORKDIR /home
+
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
