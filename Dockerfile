@@ -1,7 +1,7 @@
 # Build structurizr-cli
 FROM gradle:jdk11 as builder
 
-ENV STRUCTURIZR_CLI_VERSION=1.5.0
+ENV STRUCTURIZR_CLI_VERSION=1.6.0
 
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
