@@ -1,12 +1,12 @@
 # Build structurizr-cli
 FROM gradle:jdk11 as builder
 
-ENV STRUCTURIZR_CLI_VERSION=1.6.0
+ENV STRUCTURIZR_CLI_VERSION=1.9.0
 
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN git clone --depth 1 --branch "v$STRUCTURIZR_CLI_VERSION" https://github.com/structurizr/cli.git
-RUN cd cli && gradle bootJar --no-daemon
+RUN cd cli && ./gradlew build --no-daemon
 
 # Structurizr CLI
 FROM adoptopenjdk:11-jre-hotspot-focal
