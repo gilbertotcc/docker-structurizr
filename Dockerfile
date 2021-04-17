@@ -1,5 +1,5 @@
 # Build structurizr-cli
-FROM gradle:jdk8 as builder
+FROM gradle:jdk11 as builder
 
 ENV STRUCTURIZR_CLI_VERSION=1.9.0
 
